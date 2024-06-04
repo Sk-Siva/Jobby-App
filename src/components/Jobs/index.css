@@ -1,0 +1,38 @@
+.jobs-main-con {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 20px;
+  min-height: 100vh;
+  padding-left: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.job-list-con {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.search-con {
+  border-style: solid;
+  background-color: transparent;
+  border-radius: 10px;
+  border-width: 1px;
+  color: #ffffff;
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.search-input {
+  border: none;
+  color: #ffffff;
+  outline: none;
+}
+.search {
+  background: none;
+  outline: none;
+  border: none;
+  color: #ffffff;
+}

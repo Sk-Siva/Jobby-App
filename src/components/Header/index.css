@@ -1,0 +1,24 @@
+.header-con {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #475569;
+  width: 100%;
+}
+.nav-list-con {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.nav-item {
+  margin-right: 100px;
+}
+.link {
+  text-decoration: none;
+  color: #ffffff;
+}

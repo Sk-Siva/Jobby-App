@@ -1,0 +1,13 @@
+.notfound-img {
+  height: 250px;
+  width: 250px;
+}
+.not-found-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+}

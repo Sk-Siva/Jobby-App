@@ -1,0 +1,9 @@
+.home-con {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/home-lg-bg.png');
+  padding: 10px;
+  background-size: cover;
+  height: 100vh;
+  color: #ffffff;
+  padding-left: 100px;
+  padding-top: 200px;
+}
