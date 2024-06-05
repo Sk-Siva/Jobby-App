@@ -26,10 +26,10 @@ class Jobs extends Component {
   }
 
   componentDidMount() {
-    this.getProductsList()
+    this.getJobsList()
   }
 
-  getProductsList = async () => {
+  getJobsList = async () => {
     this.setState({status: statusConstants.loading})
     const {employmentType, minimumPackage, searchText} = this.state
     const jwtToken = Cookies.get('jwt_token')
@@ -72,8 +72,7 @@ class Jobs extends Component {
 
   getJobsListView = () => {
     const {jobsList} = this.state
-    const isJobs = jobsList.length > 0
-    return isJobs ? (
+    return (
       <div>
         <div className="search-con">
           <input
@@ -97,16 +96,6 @@ class Jobs extends Component {
           ))}
         </ul>
       </div>
-    ) : (
-      <div className="not-found-con">
-        <img
-          className="notfound-img"
-          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-          alt="no job"
-        />
-        <h1>No Jobs Found</h1>
-        <p>We could not find any job. Try other filters.</p>
-      </div>
     )
   }
 
@@ -117,7 +106,7 @@ class Jobs extends Component {
   )
 
   onRetry = () => {
-    this.setState({status: statusConstants.loading}, this.getProductsList)
+    this.setState({status: statusConstants.loading}, this.getJobsList)
   }
 
   getFailureView = () => (
@@ -135,16 +124,44 @@ class Jobs extends Component {
     </div>
   )
 
+  getNoJobsView = () => (
+    <div className="not-found-con">
+      <img
+        className="notfound-img"
+        src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+        alt="no job"
+      />
+      <h1>No Jobs Found</h1>
+      <p>We could not find any job. Try other filters.</p>
+    </div>
+  )
+
   updateEmploymentType = employmentType => {
-    this.setState({employmentType}, this.getProductsList)
+    this.setState({employmentType}, this.getJobsList)
   }
 
   updateMinimumPackage = minimumPackage => {
-    this.setState({minimumPackage}, this.getProductsList)
+    this.setState({minimumPackage}, this.getJobsList)
   }
 
   updateSearchText = event => {
     this.setState({searchText: event.target.value})
+  }
+
+  getJobsView = () => {
+    const {status} = this.state
+    switch (status) {
+      case statusConstants.success:
+        return this.getJobsListView()
+      case statusConstants.loading:
+        return this.getLoaderView()
+      case statusConstants.failure:
+        return this.getFailureView()
+      case statusConstants.noJobs:
+        return this.getNoJobsView()
+      default:
+        return null
+    }
   }
 
   render() {
@@ -159,22 +176,7 @@ class Jobs extends Component {
               updateMinimumPackage={this.updateMinimumPackage}
             />
           </div>
-          <div>
-            {status === statusConstants.loading && this.getLoaderView()}
-            {status === statusConstants.success && this.getJobsListView()}
-            {status === statusConstants.failure && this.getFailureView()}
-            {status === statusConstants.noJobs && (
-              <div className="not-found-con">
-                <img
-                  className="notfound-img"
-                  src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-                  alt="no job"
-                />
-                <h1>No Jobs Found</h1>
-                <p>We could not find any job. Try other filters.</p>
-              </div>
-            )}
-          </div>
+          <div>{this.getJobsView()}</div>
         </div>
       </>
     )
