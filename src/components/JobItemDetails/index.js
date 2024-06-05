@@ -43,8 +43,6 @@ class JobItemDetails extends Component {
 
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(response)
-    console.log(data)
 
     if (response.ok) {
       const updatedJobItemData = {
@@ -77,7 +75,6 @@ class JobItemDetails extends Component {
         rating: each.rating,
         title: each.title,
       }))
-      console.log(updatedSimilarJobs)
 
       this.setState({
         jobDetail: updatedJobItemData,
