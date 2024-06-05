@@ -34,7 +34,7 @@ const SimilarJobsCard = props => {
               </div>
             </div>
             <hr />
-            <p>Description</p>
+            <h1>Description</h1>
             <p>{jobDescription}</p>
             <div className="package-con">
               <div className="location-con">
