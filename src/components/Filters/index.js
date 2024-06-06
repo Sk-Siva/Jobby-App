@@ -170,7 +170,7 @@ class Filters extends Component {
           ))}
         </ul>
         <hr />
-        <h1>Salary Package</h1>
+        <h1>Salary Range</h1>
         <ul className="list-con">
           {salaryRangesList.map(each => (
             <li className="list" key={each.salaryRangeId}>
