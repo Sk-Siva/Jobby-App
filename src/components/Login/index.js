@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import './index.css'
 
@@ -43,7 +44,11 @@ class Home extends Component {
   }
 
   render() {
-    const {isError, errorMsg} = this.state
+    const {isError, errorMsg, username, password} = this.state
+    const token = Cookies.get('jwt_token')
+    if (token !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-main-con">
         <div className="login-con">
@@ -58,6 +63,7 @@ class Home extends Component {
               <input
                 id="username"
                 type="text"
+                value={username}
                 placeholder="Username"
                 onChange={this.onUsernameChange}
               />
@@ -68,6 +74,7 @@ class Home extends Component {
               <input
                 id="password"
                 type="password"
+                value={password}
                 placeholder="Password"
                 onChange={this.onPasswordChange}
               />
