@@ -35,7 +35,7 @@ class Jobs extends Component {
     const jwtToken = Cookies.get('jwt_token')
     const employmentTypeString = employmentType.join(',')
     const url = `https://apis.ccbp.in/jobs?employment_type=${employmentTypeString}&minimum_package=${minimumPackage}&search=${searchText}`
-
+    console.log(url)
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -74,23 +74,7 @@ class Jobs extends Component {
     const {jobsList} = this.state
     return (
       <div>
-        <div className="search-con">
-          <input
-            className="search-input"
-            type="search"
-            placeholder="search"
-            onChange={this.updateSearchText}
-          />
-          <button
-            className="search"
-            type="button"
-            data-testid="searchButton"
-            onClick={this.getProductsList}
-          >
-            <BsSearch className="search-icon" />
-          </button>
-        </div>
-        <ul className="job-list-con">
+        <ul className='job-list-con'>
           {jobsList.map(each => (
             <JobCard key={each.id} jobDetails={each} />
           ))}
@@ -100,8 +84,8 @@ class Jobs extends Component {
   }
 
   getLoaderView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    <div className='loader-container' data-testid='loader'>
+      <Loader type='ThreeDots' color='#ffffff' height='50' width='50' />
     </div>
   )
 
@@ -110,26 +94,26 @@ class Jobs extends Component {
   }
 
   getFailureView = () => (
-    <div className="not-found-con">
+    <div className='not-found-con'>
       <img
-        className="notfound-img"
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-        alt="failure view"
+        className='notfound-img'
+        src='https://assets.ccbp.in/frontend/react-js/failure-img.png'
+        alt='failure view'
       />
       <h1>Oops! Something Went Wrong</h1>
       <p>We cannot seem to find the page you are looking for.</p>
-      <button type="button" className="login-btn" onClick={this.onRetry}>
+      <button type='button' className='login-btn' onClick={this.onRetry}>
         Retry
       </button>
     </div>
   )
 
   getNoJobsView = () => (
-    <div className="not-found-con">
+    <div className='not-found-con'>
       <img
-        className="notfound-img"
-        src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
-        alt="no job"
+        className='notfound-img'
+        src='https://assets.ccbp.in/frontend/react-js/no-jobs-img.png'
+        alt='no jobs'
       />
       <h1>No Jobs Found</h1>
       <p>We could not find any job. Try other filters.</p>
@@ -146,6 +130,12 @@ class Jobs extends Component {
 
   updateSearchText = event => {
     this.setState({searchText: event.target.value})
+  }
+
+  onKeydown = event => {
+    if (event.key === 'Enter') {
+      this.getJobsList()
+    }
   }
 
   getJobsView = () => {
@@ -169,14 +159,33 @@ class Jobs extends Component {
     return (
       <>
         <Header />
-        <div className="jobs-main-con">
+        <div className='jobs-main-con'>
           <div>
             <Filters
               updateEmploymentType={this.updateEmploymentType}
               updateMinimumPackage={this.updateMinimumPackage}
             />
           </div>
-          <div>{this.getJobsView()}</div>
+          <div>
+            <div className='search-con'>
+              <input
+                className='search-input'
+                type='search'
+                placeholder='search'
+                onChange={this.updateSearchText}
+                onKeyDown={this.onKeydown}
+              />
+              <button
+                className='search'
+                type='button'
+                data-testid='searchButton'
+                onClick={this.getJobsListView}
+              >
+                <BsSearch className='search-icon' />
+              </button>
+            </div>
+            {this.getJobsView()}
+          </div>
         </div>
       </>
     )
