@@ -179,7 +179,7 @@ class Jobs extends Component {
                 className='search'
                 type='button'
                 data-testid='searchButton'
-                onClick={this.getJobsListView}
+                onClick={this.getJobsList}
               >
                 <BsSearch className='search-icon' />
               </button>
